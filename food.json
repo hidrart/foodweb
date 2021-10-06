@@ -1,0 +1,11 @@
+{
+    "Makanan": [{
+        "id": 1,
+        "nama": "Nasi Goreng",
+        "harga": 20000
+    }, {
+        "id": 2,
+        "nama": "Sate Padang",
+        "resep": 25000
+    }]
+}
