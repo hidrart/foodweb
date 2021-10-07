@@ -1,11 +1,14 @@
 {
-    "foods": [{
-        "id": 1,
-        "nama": "Nasi Goreng",
-        "harga": 20000
-    }, {
-        "id": 2,
-        "nama": "Sate Padang",
-        "harga": 25000
-    }]
+  "foods": [
+    {
+      "id": 11,
+      "nama": "Ayam Geprek",
+      "harga": "20000"
+    },
+    {
+      "id": 12,
+      "nama": "Tempe",
+      "harga": "1000"
+    }
+  ]
 }

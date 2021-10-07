@@ -59,6 +59,23 @@
                         </div>
                         <button type="submit" id="btnSubmit" class="btn btn-dark">Add Food</button>
                     </form>
+                    <form class="mb-5 needs-validation collapse" action="#" id="editFoodForm" novalidate>
+                        <div class="row mb-3">
+                            <div class="col-md-8 col-12">
+                                <label for="nama" class="form-label">Nama Menu</label>
+                                <input type="text" class="form-control" id="nama" aria-describedby="helpNama" required>
+                                <div class="invalid-feedback"> Data cannot be Empty </div>
+                                <div id="helpNama" class="form-text">Masukkan nama makanan yang ingin di input.</div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <label for="harga" class="form-label">Harga</label>
+                                <input type="number" class="form-control" id="harga" aria-describedby="helpHarga" required>
+                                <div class="invalid-feedback"> Input price in rupiah </div>
+                                <div id="helpHarga" class="form-text">Masukkan harga dalam rupiah.</div>
+                            </div>
+                        </div>
+                        <button type="submit" id="btnSubmit" class="btn btn-dark">Edit Food</button>
+                    </form>
                     <div class="row" id="myAlert">
                     </div>
                 </div>
