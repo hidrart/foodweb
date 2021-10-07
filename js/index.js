@@ -60,8 +60,9 @@ const createAlert = async (message, alerttype) => {
     messageAlert.innerHTML = message;
     alert.appendChild(messageAlert)
     document.getElementById('myAlert').appendChild(alert)
-    await sleep(5000);
-    document.getElementById("alertInstance").remove();
+    setTimeout(function() {
+        document.getElementById("alertInstance").remove();
+    }, 5000);
 }
 const addFood = async () => {
     const form = document.getElementById('foodForm');
@@ -170,4 +171,3 @@ const isContain = async (food) => {
     });
     return flag;
 }
-const sleep = (m) => new Promise(r => setTimeout(r, m))

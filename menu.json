@@ -2,7 +2,12 @@
   "foods": [
     {
       "id": 2,
-      "nama": "qwa",
+      "nama": "aaa",
+      "harga": "122"
+    },
+    {
+      "id": 3,
+      "nama": "a",
       "harga": "1"
     }
   ]
