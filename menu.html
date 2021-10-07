@@ -27,7 +27,7 @@
                         <a class="nav-link fw-bold" href="/menu.html">Menu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="/generate.html">Generate</a>
                     </li>
                 </ul>
             </div>
@@ -42,6 +42,8 @@
                     <p class="lh-lg" style="text-align: justify"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta sunt rerum, nostrum fugit quis veritatis ex ea libero blanditiis itaque fugiat laudantium! Eaque debitis sunt velit odit molestiae quo sequi cum maiores voluptatum molestias quidem, quibusdam repellendus tenetur in voluptatibus dignissimos magnam reprehenderit quae, blanditiis qui, nisi quas.</p>
                 </div>
                 <div class="col">
+                    <div class="row" id="myAlert">
+                    </div>
                     <form class="mb-5 needs-validation" action="#" id="foodForm" novalidate>
                         <div class="row mb-3">
                             <div class="col-md-8 col-12">
@@ -57,7 +59,7 @@
                                 <div id="helpHarga" class="form-text">Masukkan harga dalam rupiah.</div>
                             </div>
                         </div>
-                        <button type="submit" id="btnSubmit" class="btn btn-dark">Add Food</button>
+                        <button id="btnSubmit" class="btn btn-dark">Add Food</button>
                     </form>
                     <form class="mb-5 needs-validation collapse" action="#" id="editFoodForm" novalidate>
                         <div class="row mb-3">
@@ -74,10 +76,8 @@
                                 <div id="helpHarga" class="form-text">Masukkan harga dalam rupiah.</div>
                             </div>
                         </div>
-                        <button type="submit" id="btnSubmit" class="btn btn-dark">Edit Food</button>
+                        <button id="btnSubmit" class="btn btn-dark">Edit Food</button>
                     </form>
-                </div>
-                <div class="row" id="myAlert">
                 </div>
                 <div class="col">
                     <table class="table" id="foodTable">

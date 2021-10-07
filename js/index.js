@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async function(event) {
+document.addEventListener('DOMContentLoaded', async (event) => {
     updateFood(await readData());
     await addFood();
 });
@@ -51,7 +51,7 @@ const deleteData = async (id) => {
         },
     });
 }
-const createAlert = async (message, alerttype) => {
+const createAlert = (message, alerttype) => {
     var alert = document.createElement('div')
     var messageAlert = document.createElement('span')
     alert.setAttribute('id', 'alertInstance')
@@ -61,65 +61,69 @@ const createAlert = async (message, alerttype) => {
     alert.appendChild(messageAlert)
     document.getElementById('myAlert').appendChild(alert)
     setTimeout(function() {
-        document.getElementById("alertInstance").remove();
+        document.getElementById('myAlert').innerHTML = ''
     }, 5000);
 }
 const addFood = async () => {
+    'use strict'
+    const data = await readData();
     const form = document.getElementById('foodForm');
     form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
         if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
             form.classList.add('was-validated');
-            await createAlert("Data gagal di tambahkan", "alert-danger");
+            createAlert("Data gagal di tambahkan", "alert-danger");
             setTimeout(function() {
                 form.classList.remove('was-validated');
             }, 5000);
         } else {
             var food = {
-                id: await readData().length + 1,
+                id: data.length + 1,
                 nama: form.elements['nama'].value,
                 harga: form.elements['harga'].value,
             }
-            if (!await isContain(food)) {
-                createData(food);
-                await createAlert("Data berhasil ditambahkan", "alert-success");
+            if (!isContain(data, food)) {
+                createAlert("Data berhasil ditambahkan", "alert-success");
+                await createData(food);
                 form.reset();
                 form.classList.remove('was-validated');
             } else {
-                await createAlert("Data sudah terdapat di Database", "alert-danger");
+                createAlert("Data sudah terdapat di Database", "alert-danger");
             }
         }
     });
     updateFood(await readData());
 }
 const editFood = async (id) => {
-    var data = await getData(id);
+    'use strict'
+    const data = await readData();
+    const tempFood = await getData(id);
     const form = document.getElementById('editFoodForm');
-    form.querySelector('#nama').setAttribute('value', `${data.nama}`);
-    form.querySelector('#harga').setAttribute('value', `${data.harga}`);
+    form.querySelector('#nama').setAttribute('value', `${tempFood.nama}`);
+    form.querySelector('#harga').setAttribute('value', `${tempFood.harga}`);
     form.addEventListener('submit', async (event) => {
+        event.preventDefault()
+        event.stopPropagation()
         if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
             form.classList.add('was-validated');
-            await createAlert("Data gagal di ubah", "alert-danger");
+            createAlert("Data gagal di ubah", "alert-danger");
             setTimeout(function() {
                 form.classList.remove('was-validated');
             }, 5000);
         } else {
             var food = {
-                id: data.id,
+                id: tempFood.id,
                 nama: form.elements['nama'].value,
                 harga: form.elements['harga'].value,
             };
-            if (!await isContain(food)) {
-                putData(data.id, food);
-                await createAlert("Data berhasil diubah", "alert-success");
+            if (!isContain(data, food)) {
+                createAlert("Data berhasil diubah", "alert-success");
+                await putData(tempFood.id, food);
                 form.reset();
                 form.classList.remove('was-validated');
             } else {
-                await createAlert("Data sudah terdapat di Database", "alert-danger");
+                createAlert("Data sudah terdapat di Database", "alert-danger");
             }
         }
     }, false);
@@ -145,7 +149,7 @@ const updateFood = (data) => {
         edit.setAttribute('data-bs-toggle', 'collapse')
         edit.setAttribute('data-bs-target', '#editFoodForm')
         edit.setAttribute('aria-expanded', 'false')
-        edit.setAttribute('aria-controls', 'editFoodForm')
+        edit.setAttribute('aria-controls', '#editFoodForm')
         edit.setAttribute('onClick', `editFood(${food.id})`);
         edit.innerHTML = '<i class="fas fa-edit"></i>';
         // append button to action column
@@ -157,12 +161,12 @@ const updateFood = (data) => {
     })
 }
 const deleteFood = async (id) => {
-    await deleteData(id);
+    const tempFood = await getData(id);
+    await deleteData(tempFood.id);
+    createAlert(`Data ${tempFood.nama} berhasil di hapus`, "alert-warning");
     updateFood(await readData());
-    await createAlert(`Data ${await getData(id).nama} berhasil di hapus`, "alert-warning");
 }
-const isContain = async (food) => {
-    var data = await readData();
+const isContain = (data, food) => {
     var flag = false;
     data.forEach(item => {
         if (item.nama == food.nama) {
